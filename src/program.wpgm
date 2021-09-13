@@ -28,5 +28,7 @@ program juego {
 	game.onCollideDo(limiteSuperior, { algo => algo.estabilizar()})
 	game.onCollideDo(limiteInferior, { algo => algo.estabilizar()})
 	
+	
+	
 	game.start()
 }

@@ -20,7 +20,7 @@ object protagonista {
 	//method derecha() { position = derecha.mover(position) }
 	//method izquierda() { position = izquierda.mover(position) }
 	method disparar() { 
-		var disparo = new Disparo()
+		var disparo = new Disparo(fuente = position)
 		disparos.agregarDisparo(disparo)
 		game.addVisual(disparo)
 	}
