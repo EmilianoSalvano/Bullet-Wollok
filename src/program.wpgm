@@ -2,25 +2,30 @@ import wollok.game.*
 import example.*
 
 program juego {
-	game.cellSize(50)
+	game.cellSize(5)	//50
 	game.title("Titulo Pendiente")
-	game.width(20)
-	game.height(10)
+	game.width(200)	//20
+	game.height(100)	//10
 	game.addVisual(protagonista)
 	game.addVisual(limiteIzquierdo)
 	game.addVisual(limiteDerecho)
 	game.addVisual(limiteSuperior)
 	game.addVisual(limiteInferior)
 	
-	keyboard.up().onPressDo{protagonista.arriba()}
-	keyboard.down().onPressDo{protagonista.abajo() }
-	keyboard.right().onPressDo{protagonista.derecha()}
-	keyboard.left().onPressDo{protagonista.izquierda()}
+	keyboard.up().onPressDo{protagonista.avance(arriba)}
+	keyboard.down().onPressDo{protagonista.avance(abajo) }
+	keyboard.right().onPressDo{protagonista.avance(derecha)}
+	keyboard.left().onPressDo{protagonista.avance(izquierda)}
+	keyboard.w().onPressDo{protagonista.disparar()}
+	//keyboard.space().onPressDo{}
 	
-	game.onCollideDo(limiteIzquierdo, { algo => algo.derecha() })
-	game.onCollideDo(limiteDerecho, { algo => algo.izquierda() })
-	game.onCollideDo(limiteSuperior, { algo => algo.abajo() })
-	game.onCollideDo(limiteInferior, { algo => algo.arriba() })
+	game.onTick(2000, "movimiento",{ protagonista.avance(derecha) })
+	game.onTick(500, "disparos", { disparo.avanzar() }) //tiempo en ms que tarda en hacer cada movimiento
+	
+	game.onCollideDo(limiteIzquierdo, { algo => algo.avance(derecha) })
+	game.onCollideDo(limiteDerecho, { algo => algo.avance(izquierda) })
+	game.onCollideDo(limiteSuperior, { algo => algo.avance(abajo) })
+	game.onCollideDo(limiteInferior, { algo => algo.avance(arriba) })
 	
 	game.start()
 }
