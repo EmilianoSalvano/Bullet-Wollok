@@ -1,4 +1,5 @@
 import wollok.game.*
+import Disparo.*
 import example.*
 
 program juego {
@@ -17,15 +18,15 @@ program juego {
 	keyboard.right().onPressDo{protagonista.avance(derecha)}
 	keyboard.left().onPressDo{protagonista.avance(izquierda)}
 	keyboard.w().onPressDo{protagonista.disparar()}
-	//keyboard.space().onPressDo{}
+	keyboard.space().onPressDo{protagonista.estabilizar()}
 	
-	game.onTick(2000, "movimiento",{ protagonista.avance(derecha) })
-	game.onTick(500, "disparos", { disparo.avanzar() }) //tiempo en ms que tarda en hacer cada movimiento
+	game.onTick(2000, "movimiento",{})
+	game.onTick(10, "disparos", { disparos.avanzar() }) //tiempo en ms que tarda en hacer cada movimiento
 	
-	game.onCollideDo(limiteIzquierdo, { algo => algo.avance(derecha) })
-	game.onCollideDo(limiteDerecho, { algo => algo.avance(izquierda) })
-	game.onCollideDo(limiteSuperior, { algo => algo.avance(abajo) })
-	game.onCollideDo(limiteInferior, { algo => algo.avance(arriba) })
+	game.onCollideDo(limiteIzquierdo, { algo => algo.estabilizar()})
+	game.onCollideDo(limiteDerecho, { algo => algo.estabilizar()})
+	game.onCollideDo(limiteSuperior, { algo => algo.estabilizar()})
+	game.onCollideDo(limiteInferior, { algo => algo.estabilizar()})
 	
 	game.start()
 }

@@ -1,4 +1,5 @@
 import wollok.game.*
+import Disparo.*
 
 object protagonista {
 	var position = game.at(0,0)
@@ -10,15 +11,26 @@ object protagonista {
 		game.removeTickEvent("movimiento")
 		game.onTick(10, "movimiento", { position = direccion.mover(position) })
 	}
+	method estabilizar() {
+		game.removeTickEvent("movimiento")
+		game.onTick(5000, "movimiento", {})
+	}
 	//method arriba() { position = arriba.mover(position)	}
 	//method abajo() { position = abajo.mover(position) }
 	//method derecha() { position = derecha.mover(position) }
 	//method izquierda() { position = izquierda.mover(position) }
 	method disparar() { 
+		var disparo = new Disparo()
+		disparos.agregarDisparo(disparo)
 		game.addVisual(disparo)
 	}
 }
 
+object disparos{
+	var property listaDisparos = []
+	method avanzar() {listaDisparos.forEach({disparo => disparo.avanzar()} )}
+	method agregarDisparo(disparo) {listaDisparos.add(disparo)}
+}
 
 
 object limiteIzquierdo{
@@ -49,12 +61,12 @@ object limiteInferior{
 	method izquierda() { position = position.left(1) }
 }
 
-object disparo{
-	var fuente = game.at(10,0)
-	method position() = fuente
-	method image() = "proyectil2.png"
-	method avanzar(){fuente = fuente.up(1)}
-}
+//class Disparo{
+//	var fuente = game.at(10,0)
+//	method position() = fuente
+//	method image() = "proyectil2.png"
+//	method avanzar(){fuente = fuente.up(1)}
+//}
 
 object arriba{
 	method mover(posicion){
