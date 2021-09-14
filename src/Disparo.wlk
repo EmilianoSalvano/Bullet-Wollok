@@ -10,4 +10,5 @@ class Disparo {
 
 class Limites {
 	var property position = game.at(-1,0)
+	
 }

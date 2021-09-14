@@ -23,7 +23,14 @@ object protagonista {
 		var disparo = new Disparo(fuente = position)
 		disparos.agregarDisparo(disparo)
 		game.addVisual(disparo)
+		game.onCollideDo(disparo, {algo => game.removeVisual(algo)})
 	}
+}
+
+object enemigo{
+	var position = game.at(100,50)
+	method position() = position
+	method image() = "veigar 50x65.png"
 }
 
 object disparos{

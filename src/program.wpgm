@@ -8,6 +8,7 @@ program juego {
 	game.width(200)	//20
 	game.height(100)	//10
 	game.addVisual(protagonista)
+	game.addVisual(enemigo)
 	game.addVisual(limiteIzquierdo)
 	game.addVisual(limiteDerecho)
 	game.addVisual(limiteSuperior)
@@ -27,8 +28,6 @@ program juego {
 	game.onCollideDo(limiteDerecho, { algo => algo.estabilizar()})
 	game.onCollideDo(limiteSuperior, { algo => algo.estabilizar()})
 	game.onCollideDo(limiteInferior, { algo => algo.estabilizar()})
-	
-	
 	
 	game.start()
 }
