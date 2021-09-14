@@ -5,8 +5,8 @@ import example.*
 program juego {
 	game.cellSize(5)	//50
 	game.title("Titulo Pendiente")
-	game.width(200)	//20
-	game.height(100)	//10
+	game.width(50)	//20
+	game.height(90)	//10
 	game.addVisual(protagonista)
 	game.addVisual(enemigo)
 	game.addVisual(limiteIzquierdo)
@@ -14,19 +14,19 @@ program juego {
 	game.addVisual(limiteSuperior)
 	game.addVisual(limiteInferior)
 	
-	keyboard.up().onPressDo{protagonista.avance(arriba)}
-	keyboard.down().onPressDo{protagonista.avance(abajo) }
-	keyboard.right().onPressDo{protagonista.avance(derecha)}
-	keyboard.left().onPressDo{protagonista.avance(izquierda)}
+	keyboard.up().onPressDo{protagonista.vertical(1)}
+	keyboard.down().onPressDo{protagonista.vertical(-1) }
+	keyboard.right().onPressDo{protagonista.horizontal(1)}
+	keyboard.left().onPressDo{protagonista.horizontal(-1)}
 	keyboard.w().onPressDo{protagonista.disparar()}
 	keyboard.space().onPressDo{protagonista.estabilizar()}
 	
-	game.onTick(2000, "movimiento",{})
-	game.onTick(10, "disparos", { disparos.avanzar() }) //tiempo en ms que tarda en hacer cada movimiento
+	game.onTick(10000, "movimiento",{})
+	game.onTick(7, "disparos", { disparos.avanzar() }) //tiempo en ms que tarda en hacer cada movimiento
 	
 	game.onCollideDo(limiteIzquierdo, { algo => algo.estabilizar()})
 	game.onCollideDo(limiteDerecho, { algo => algo.estabilizar()})
-	game.onCollideDo(limiteSuperior, { algo => algo.estabilizar()})
+	//game.onCollideDo(limiteSuperior, { algo => game.removeVisual(algo)})
 	game.onCollideDo(limiteInferior, { algo => algo.estabilizar()})
 	
 	game.start()
